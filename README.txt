@@ -1,32 +1,41 @@
-# File Transfer Server and Client
+# CS342 Operating Systems - Project 1: File Transfer Server
 
 ## Overview
-This project implements a multi-process and multi-threaded file transfer server and client system using C and Linux. The primary goal is to facilitate concurrent file transfer between a server and multiple clients while practicing concepts such as process creation, multi-threaded programming, inter-process communication (IPC), POSIX message queues, and named pipes.
 
-The project is divided into two parts:
-1. **Part A:** Multi-process implementation
-2. **Part B:** Multi-threaded implementation
+This project implements a multi-process and multi-threaded file transfer server and client system in C/Linux. The project explores key concepts like process creation, inter-process communication (IPC), multi-threading, and POSIX constructs, specifically message queues and named pipes.
+
+---
+
+## Project Structure
+
+The project includes the following components:
+
+1. **ftserver.c**: Multi-process server that handles client requests via child processes.
+2. **ftclient.c**: Client program for interacting with the server.
+3. **ftterminate.c**: Terminates the server and all related processes, cleaning up resources.
+4. **tftserver.c**: Multi-threaded server version.
+5. **tftclient.c**: Multi-threaded client program (same as ftclient.c but compiled separately).
+6. **Makefile**: Automates compilation of all components.
+7. **report.pdf**: Performance analysis of the implemented programs.
+
+---
 
 ## Features
-1. **Concurrent File Transfers:**
-   - Multiple clients can interact with the server simultaneously.
-   - For each client, the server spawns a separate process (Part A) or thread (Part B).
 
-2. **Command-Based Interaction:**
-   - `list`: Lists all files in the server's directory.
-   - `get <FILENAME> <LOCALFILENAME>`: Downloads a file from the server.
-   - `quit`: Terminates the client and its associated process/thread on the server.
+- Multi-process file transfer server using POSIX message queues and named pipes.
+- Multi-threaded file transfer server.
+- Supports concurrent handling of up to 10 clients.
+- Commands:
+  - `list`: Lists files in the server directory.
+  - `get FILENAME LOCALFILENAME`: Downloads a file from the server.
+  - `quit`: Terminates the client and its corresponding server process or thread.
+- Clean termination using `ftterminate`.
 
-3. **POSIX Message Queues and Named Pipes:**
-   - Message queues handle client-server connection requests.
-   - Named pipes facilitate client-server communication.
-
-4. **Termination Program:**
-   - A `ftterminate` program to cleanly terminate the server and all associated processes, ensuring no residual message queues or pipes.
+---
 
 ## Usage
 
-### 1. Compilation
-Use the provided `Makefile` to compile the programs:
+### Compilation
+Run the following command to compile all components:
 ```bash
 make
